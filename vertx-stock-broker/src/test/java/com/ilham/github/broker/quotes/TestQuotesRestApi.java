@@ -1,13 +1,12 @@
 package com.ilham.github.broker.quotes;
 
-import com.ilham.github.broker.MainVerticle;
+import com.ilham.github.broker.AbstractRestApiTest;
 import com.ilham.github.broker.assets.TestAssetsRestApi;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -16,18 +15,13 @@ import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(VertxExtension.class)
-public class TestQuotesRestApi {
+public class TestQuotesRestApi extends AbstractRestApiTest {
 
   private static final Logger LOG = LoggerFactory.getLogger(TestAssetsRestApi.class);
 
-  @BeforeEach
-  void deploy_verticle(Vertx vertx, VertxTestContext context) {
-    vertx.deployVerticle(new MainVerticle(), context.succeeding(id -> context.completeNow()));
-  }
-
   @Test
   void returns_quote_for_asset(Vertx vertx, VertxTestContext context) throws Throwable {
-    var client = WebClient.create(vertx, new WebClientOptions().setDefaultPort(MainVerticle.PORT));
+    var client = webClient(vertx);
     client.get("/quotes/AMZN")
       .send()
       .onComplete(context.succeeding(response -> {
@@ -41,7 +35,7 @@ public class TestQuotesRestApi {
 
   @Test
   void returns_not_found_for_unknown_asset(Vertx vertx, VertxTestContext context) throws Throwable {
-    var client = WebClient.create(vertx, new WebClientOptions().setDefaultPort(MainVerticle.PORT));
+    var client = webClient(vertx);
     client.get("/quotes/UNKNOWN")
       .send()
       .onComplete(context.succeeding(response -> {
@@ -51,5 +45,9 @@ public class TestQuotesRestApi {
         assertEquals("{\"message\":\"quote for asset UNKNOWN not available!\",\"path\":\"/quotes/UNKNOWN\"}", json.encode());
         context.completeNow();
       }));
+  }
+
+  private WebClient webClient(Vertx vertx) {
+    return WebClient.create(vertx, new WebClientOptions().setDefaultPort(TEST_SERVER_PORT));
   }
 }
