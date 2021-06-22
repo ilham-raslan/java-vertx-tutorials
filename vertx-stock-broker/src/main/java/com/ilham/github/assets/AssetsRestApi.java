@@ -1,6 +1,7 @@
 package com.ilham.github.assets;
 
 import io.vertx.ext.web.Router;
+import io.vertx.pgclient.PgPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,7 @@ public class AssetsRestApi {
   private static final Logger LOG = LoggerFactory.getLogger(AssetsRestApi.class);
   public static final List<String> ASSETS = Arrays.asList("APPL", "AMZN", "FB", "GOOG", "MSFT", "NFLX", "TSLA");
 
-  public static void attach(Router parent) {
+  public static void attach(Router parent, PgPool db) {
     parent.get("/assets").handler(new GetAssetsHandler());
   }
 }

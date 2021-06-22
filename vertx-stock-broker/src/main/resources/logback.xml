@@ -6,10 +6,10 @@
     </encoder>
   </appender>
 
-  <logger name="com.ilham.github" level="debug"/>
-  <logger name="io.netty" level="warn"/>
-  <logger name="io.vertx" level="info"/>
-  <logger name="org.flywaydb.core" level="info"/>
+  <logger name="com.ilham.github" level="DEBUG"/>
+  <logger name="io.netty" level="WARN"/>
+  <logger name="io.vertx" level="INFO"/>
+  <logger name="org.flywaydb.core" level="INFO"/>
 
   <root level="INFO">
     <appender-ref ref="STDOUT"/>

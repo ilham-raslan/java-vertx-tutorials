@@ -1,5 +1,7 @@
 package com.ilham.github.broker;
 
+import com.ilham.github.broker.config.ConfigLoader;
+import com.ilham.github.broker.db.migration.FlywayMigration;
 import io.vertx.core.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,17 @@ public class MainVerticle extends AbstractVerticle {
     vertx.deployVerticle(VersionInfoVerticle.class.getName())
       .onFailure(startPromise::fail)
       .onSuccess(id -> LOG.info("Deployed {} with id {}", VersionInfoVerticle.class.getSimpleName(), id))
+      .compose(next -> migrateDatabase())
+      .onFailure(startPromise::fail)
+      .onSuccess(id -> LOG.info("Migrated db schema to latest version!"))
       .compose(next -> deployRestApiVerticle(startPromise));
+  }
+
+  private Future<Void> migrateDatabase() {
+    return ConfigLoader.load(vertx)
+      .compose(config -> {
+        return FlywayMigration.migrate(vertx, config.getDbConfig());
+      });
   }
 
   private Future<String> deployRestApiVerticle(Promise<Void> startPromise) {
