@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.ilham.github.broker.watchlist.WatchListRestApi.getAccountId;
-
 public class GetWatchListHandler implements Handler<RoutingContext> {
 
   private static final Logger LOG = LoggerFactory.getLogger(GetWatchListHandler.class);
@@ -24,7 +22,7 @@ public class GetWatchListHandler implements Handler<RoutingContext> {
 
   @Override
   public void handle(RoutingContext context) {
-    var accountId = getAccountId(context);
+    var accountId = WatchListRestApi.getAccountId(context);
     var watchList = Optional.ofNullable(watchListPerAccount.get(UUID.fromString(accountId)));
     if (watchList.isEmpty()) {
       context.response()

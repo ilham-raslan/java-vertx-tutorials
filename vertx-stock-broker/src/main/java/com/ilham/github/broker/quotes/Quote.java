@@ -1,6 +1,6 @@
 package com.ilham.github.broker.quotes;
 
-import com.ilham.github.assets.Asset;
+import com.ilham.github.broker.assets.Asset;
 import io.vertx.core.json.JsonObject;
 import lombok.Builder;
 import lombok.Value;

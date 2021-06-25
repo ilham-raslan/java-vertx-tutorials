@@ -1,7 +1,7 @@
 package com.ilham.github.broker.watchlist;
 
-import com.ilham.github.assets.Asset;
 import com.ilham.github.broker.AbstractRestApiTest;
+import com.ilham.github.broker.assets.Asset;
 import com.ilham.github.broker.assets.TestAssetsRestApi;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;

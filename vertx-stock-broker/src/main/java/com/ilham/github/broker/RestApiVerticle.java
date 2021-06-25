@@ -1,6 +1,6 @@
 package com.ilham.github.broker;
 
-import com.ilham.github.assets.AssetsRestApi;
+import com.ilham.github.broker.assets.AssetsRestApi;
 import com.ilham.github.broker.config.BrokerConfig;
 import com.ilham.github.broker.config.ConfigLoader;
 import com.ilham.github.broker.quotes.QuotesRestApi;
@@ -14,6 +14,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
+import io.vertx.sqlclient.Pool;
 import io.vertx.sqlclient.PoolOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class RestApiVerticle extends AbstractVerticle {
   private void startHttpServerAndAttachRoutes(Promise<Void> startPromise, BrokerConfig configuration) {
 
     // Create DB Pool
-    final PgPool db = createDbPool(configuration);
+    final Pool db = createDbPool(configuration);
 
     final Router restApi = Router.router(vertx);
     restApi.route()
@@ -45,8 +46,8 @@ public class RestApiVerticle extends AbstractVerticle {
       )
       .failureHandler(handleFailure());
     AssetsRestApi.attach(restApi, db);
-    QuotesRestApi.attach(restApi);
-    WatchListRestApi.attach(restApi);
+    QuotesRestApi.attach(restApi, db);
+    WatchListRestApi.attach(restApi, db);
 
     vertx
       .createHttpServer().requestHandler(restApi)

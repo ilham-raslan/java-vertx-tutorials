@@ -1,4 +1,4 @@
-package com.ilham.github.assets;
+package com.ilham.github.broker.assets;
 
 import io.netty.handler.codec.http.HttpHeaderValues;
 import io.vertx.core.Handler;

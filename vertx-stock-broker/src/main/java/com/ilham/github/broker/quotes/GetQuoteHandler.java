@@ -1,6 +1,6 @@
 package com.ilham.github.broker.quotes;
 
-import io.netty.handler.codec.http.HttpResponseStatus;
+import com.ilham.github.broker.db.DbResponse;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -27,13 +27,7 @@ public class GetQuoteHandler implements Handler<RoutingContext> {
     var maybeQuote = Optional.ofNullable(cachedQuotes.get(assetParam));
 
     if (maybeQuote.isEmpty()) {
-      context.response()
-        .setStatusCode(HttpResponseStatus.NOT_FOUND.code())
-        .end(new JsonObject()
-          .put("message", "quote for asset " + assetParam + " not available!")
-          .put("path", context.normalizedPath())
-          .toBuffer()
-        );
+      DbResponse.notFound(context, "quote for asset " + assetParam + " not available!");
       return;
     }
 

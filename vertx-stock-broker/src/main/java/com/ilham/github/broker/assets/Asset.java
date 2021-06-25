@@ -1,4 +1,4 @@
-package com.ilham.github.assets;
+package com.ilham.github.broker.assets;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

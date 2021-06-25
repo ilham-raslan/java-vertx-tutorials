@@ -45,6 +45,7 @@ public class FlywayMigration {
     var pendingMigrations = flyway.info().pending();
     LOG.debug("Pending migrations are: {}", printMigrations(pendingMigrations));
 
+//    flyway.repair();
     flyway.migrate();
   }
 
