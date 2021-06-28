@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ilham.github.vertx_websockets.TestMainVerticle" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-28T10:53:37" hostname="ilhams-mbp.mynet" time="0.653">
+  <properties/>
+  <testcase name="can_receive_multiple_messages(Vertx, VertxTestContext)" classname="com.ilham.github.vertx_websockets.TestMainVerticle" time="0.653"/>
+  <system-out><![CDATA[?[33m11:53:37.926?[0;39m ?[34mINFO?[0;39m ?[32m[vert.x-eventloop-thread-0]?[0;39m ?[36mcom.ilham.github.vertx_websockets.MainVerticle?[0;39m - HTTP server started on port 8900
+?[33m11:53:37.985?[0;39m ?[31mWARN?[0;39m ?[32m[vert.x-eventloop-thread-1]?[0;39m ?[36mi.n.resolver.dns.DnsServerAddressStreamProviders?[0;39m - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS.
+?[33m11:53:38.168?[0;39m ?[34mINFO?[0;39m ?[32m[vert.x-eventloop-thread-0]?[0;39m ?[36mcom.ilham.github.vertx_websockets.WebSocketHandler?[0;39m - Opening web socket connection: /ws/simple/prices. __vertx.ws.35eeb215-3941-471a-99a8-f6d0c5a28c0f
+?[33m11:53:38.183?[0;39m ?[39mDEBUG?[0;39m ?[32m[vert.x-eventloop-thread-1]?[0;39m ?[36mcom.ilham.github.vertx_websockets.TestMainVerticle?[0;39m - Received message: Connected!
+?[33m11:53:38.183?[0;39m ?[39mDEBUG?[0;39m ?[32m[vert.x-eventloop-thread-1]?[0;39m ?[36mcom.ilham.github.vertx_websockets.TestMainVerticle?[0;39m - Not enough messages yet... (0/5)
+?[33m11:53:38.191?[0;39m ?[39mDEBUG?[0;39m ?[32m[vert.x-eventloop-thread-0]?[0;39m ?[36mcom.ilham.github.vertx_websockets.WebSocketHandler?[0;39m - Received message: ?� from client __vertx.ws.35eeb215-3941-471a-99a8-f6d0c5a28c0f
+?[33m11:53:38.198?[0;39m ?[34mINFO?[0;39m ?[32m[vert.x-eventloop-thread-0]?[0;39m ?[36mcom.ilham.github.vertx_websockets.WebSocketHandler?[0;39m - Closed __vertx.ws.35eeb215-3941-471a-99a8-f6d0c5a28c0f
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
